@@ -444,12 +444,6 @@
           <option value="" data-i18n="payeeDefault">— Default (Nuttawat Sakulsantiporn) —</option>
         </select>
       </div>
-
-      <div class="field" data-field="dueDate">
-        <label for="dueDate" data-i18n="dueDate">Due Date</label>
-        <input type="date" id="dueDate" name="dueDate" required>
-        <div class="error-text" data-i18n="errDate">Please select a date.</div>
-      </div>
     </div>
 
     <div id="itemsContainer"></div>
@@ -491,7 +485,6 @@ const I18N = {
     payee: "Payee",
     payeeOptional: "(optional — defaults to Nuttawat Sakulsantiporn)",
     payeeDefault: "— Default (Nuttawat Sakulsantiporn) —",
-    dueDate: "Due Date",
     errDate: "Please select a date.",
     addItem: "+ Add another item",
     addItemMax: (n) => `Maximum ${n} items reached`,
@@ -538,7 +531,6 @@ const I18N = {
     payee: "ผู้รับเงิน",
     payeeOptional: "(ไม่บังคับ — หากไม่เลือก จะใช้ชื่อ Nuttawat Sakulsantiporn)",
     payeeDefault: "— ค่าเริ่มต้น (Nuttawat Sakulsantiporn) —",
-    dueDate: "วันครบกำหนด",
     errDate: "กรุณาเลือกวันที่",
     addItem: "+ เพิ่มรายการ",
     addItemMax: (n) => `เพิ่มได้สูงสุด ${n} รายการ`,
@@ -583,7 +575,7 @@ function t(key, ...args) {
 // ============================================================
 // CONFIG — replace with your deployed Apps Script Web App URL
 // ============================================================
-const SUBMIT_URL = "https://script.google.com/macros/s/AKfycbyrvWzxnhK4lh7NmeorMHTzv2FSMAhTaZa0mmh2PY5Bbw7A1tvGVUEc5mbsRjThxWq2/exec";
+const SUBMIT_URL = "PASTE_YOUR_APPS_SCRIPT_WEB_APP_URL_HERE";
 
 const MAX_ITEMS = 5;
 
@@ -937,11 +929,6 @@ function validateForm() {
   if (!companySelect.value) { setFieldError(companyField, true); valid = false; }
   else setFieldError(companyField, false);
 
-  const dueDateField = document.querySelector('[data-field="dueDate"]');
-  const dueDateInput = document.getElementById('dueDate');
-  if (!dueDateInput.value) { setFieldError(dueDateField, true); valid = false; }
-  else setFieldError(dueDateField, false);
-
   const firstBlock = itemsContainer.querySelector('.item-block[data-item-index="1"]');
   if (firstBlock) {
     const checks = [
@@ -1016,7 +1003,6 @@ function collectPayload() {
     company: companySelect.value,
     branch: companySelect.value === 'BIANCA HOLDING' ? document.getElementById('branch').value : '',
     payee: payeeSelect.value,
-    dueDate: document.getElementById('dueDate').value,
     items
   };
 }
