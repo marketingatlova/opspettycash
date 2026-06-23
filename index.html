@@ -24,7 +24,7 @@
 
   body {
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans Thai", "Sarabun", Roboto, Helvetica, Arial, sans-serif;
     background: var(--bg);
     color: var(--ink);
     -webkit-font-smoothing: antialiased;
@@ -45,19 +45,50 @@
     margin: 0 -16px 20px;
     border-radius: 0 0 18px 18px;
     z-index: 10;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
   }
 
-  header.top h1 {
+  header.top .heading h1 {
     font-size: 19px;
     margin: 0;
     font-weight: 700;
     letter-spacing: -0.01em;
   }
 
-  header.top p {
+  header.top .heading p {
     margin: 4px 0 0;
     font-size: 13px;
     opacity: 0.85;
+  }
+
+  .lang-toggle {
+    flex-shrink: 0;
+    display: flex;
+    background: rgba(255,255,255,0.18);
+    border-radius: 20px;
+    padding: 3px;
+    margin-top: 2px;
+  }
+
+  .lang-toggle button {
+    border: none;
+    background: transparent;
+    color: white;
+    font-size: 12.5px;
+    font-weight: 700;
+    padding: 6px 12px;
+    border-radius: 17px;
+    cursor: pointer;
+    opacity: 0.7;
+  }
+
+  .lang-toggle button.active {
+    background: white;
+    color: var(--purple-dark);
+    opacity: 1;
   }
 
   .card {
@@ -125,7 +156,6 @@
     margin-top: 5px;
   }
 
-  /* Receipt upload */
   .upload-zone {
     border: 1.5px dashed var(--line);
     border-radius: 8px;
@@ -188,7 +218,6 @@
     word-break: break-all;
   }
 
-  /* Item blocks */
   .item-block {
     position: relative;
   }
@@ -236,7 +265,6 @@
     cursor: not-allowed;
   }
 
-  /* Sticky total bar */
   .total-bar {
     position: fixed;
     bottom: 0;
@@ -258,9 +286,7 @@
     gap: 12px;
   }
 
-  .total-info {
-    line-height: 1.2;
-  }
+  .total-info { line-height: 1.2; }
 
   .total-info .label {
     font-size: 11.5px;
@@ -295,7 +321,6 @@
     cursor: not-allowed;
   }
 
-  /* Status overlay */
   .overlay {
     position: fixed;
     inset: 0;
@@ -330,16 +355,8 @@
 
   @keyframes spin { to { transform: rotate(360deg); } }
 
-  .overlay-card h3 {
-    margin: 0 0 6px;
-    font-size: 17px;
-  }
-
-  .overlay-card p {
-    margin: 0;
-    font-size: 13.5px;
-    color: var(--ink-soft);
-  }
+  .overlay-card h3 { margin: 0 0 6px; font-size: 17px; }
+  .overlay-card p { margin: 0; font-size: 13.5px; color: var(--ink-soft); }
 
   .overlay-card.success .icon, .overlay-card.error .icon {
     font-size: 38px;
@@ -369,13 +386,9 @@
   }
 
   .field.invalid input,
-  .field.invalid select {
-    border-color: var(--danger);
-  }
+  .field.invalid select { border-color: var(--danger); }
 
-  .field.invalid .error-text {
-    display: block;
-  }
+  .field.invalid .error-text { display: block; }
 
   @media (prefers-reduced-motion: reduce) {
     .spinner { animation: none; border-top-color: var(--purple-light); }
@@ -386,54 +399,62 @@
 
 <div class="app">
   <header class="top">
-    <h1>Petty Cash Submission</h1>
-    <p>Fill in your expenses below — add up to 5 items per submission.</p>
+    <div class="heading">
+      <h1 data-i18n="title">Petty Cash Submission</h1>
+      <p data-i18n="subtitle">Fill in your expenses below — add up to 5 items per submission.</p>
+    </div>
+    <div class="lang-toggle">
+      <button type="button" id="langEn" class="active">EN</button>
+      <button type="button" id="langTh">ไทย</button>
+    </div>
   </header>
 
   <form id="pettyForm" novalidate>
 
     <div class="card">
-      <h2>Submission Info</h2>
+      <h2 data-i18n="submissionInfo">Submission Info</h2>
 
       <div class="field" data-field="company">
-        <label for="company">Company</label>
+        <label for="company" data-i18n="company">Company</label>
         <select id="company" name="company" required>
-          <option value="" disabled selected>Select company…</option>
+          <option value="" disabled selected data-i18n="selectCompany">Select company…</option>
           <option value="BIANCA HOLDING">BIANCA HOLDING</option>
           <option value="HOLY BELLY EMS">HOLY BELLY EMS</option>
           <option value="LOVA HOSPITALITY">LOVA HOSPITALITY</option>
         </select>
-        <div class="error-text">Please select a company.</div>
+        <div class="error-text" data-i18n="errCompany">Please select a company.</div>
       </div>
 
       <div class="field" id="branchField" data-field="branch" style="display:none;">
-        <label for="branch">Branch</label>
+        <label for="branch" data-i18n="branch">Branch</label>
         <select id="branch" name="branch">
-          <option value="">ALL BRANCHES</option>
+          <option value="" data-i18n="allBranches">ALL BRANCHES</option>
           <option value="BIANCA EMSPHERE">BIANCA EMSPHERE</option>
           <option value="BIANCA ONE BANGKOK">BIANCA ONE BANGKOK</option>
           <option value="BIANCA ICONSIAM">BIANCA ICONSIAM</option>
           <option value="BIANCA TERMINAL 21">BIANCA TERMINAL 21</option>
           <option value="BIANCA SIAM PARAGON">BIANCA SIAM PARAGON</option>
         </select>
-        <div class="hint">Leave as "ALL BRANCHES" if this expense covers every Bianca location.</div>
+        <div class="hint" data-i18n="branchHint">Leave as "ALL BRANCHES" if this expense covers every Bianca location.</div>
       </div>
 
       <div class="field" data-field="payee">
-        <label for="payee">Payee <span class="optional">(optional — defaults to Nuttawat Sakulsantiporn)</span></label>
-        <input type="text" id="payee" name="payee" placeholder="Name of person to reimburse">
+        <label for="payee"><span data-i18n="payee">Payee</span> <span class="optional" data-i18n="payeeOptional">(optional — defaults to Nuttawat Sakulsantiporn)</span></label>
+        <select id="payee" name="payee">
+          <option value="" data-i18n="payeeDefault">— Default (Nuttawat Sakulsantiporn) —</option>
+        </select>
       </div>
 
       <div class="field" data-field="dueDate">
-        <label for="dueDate">Due Date</label>
+        <label for="dueDate" data-i18n="dueDate">Due Date</label>
         <input type="date" id="dueDate" name="dueDate" required>
-        <div class="error-text">Please select a date.</div>
+        <div class="error-text" data-i18n="errDate">Please select a date.</div>
       </div>
     </div>
 
     <div id="itemsContainer"></div>
 
-    <button type="button" class="add-item-btn" id="addItemBtn">+ Add another item</button>
+    <button type="button" class="add-item-btn" id="addItemBtn" data-i18n="addItem">+ Add another item</button>
 
   </form>
 
@@ -443,88 +464,184 @@
         <div class="label" id="itemCountLabel">1 item</div>
         <div class="amount" id="totalAmount">0.00 THB</div>
       </div>
-      <button type="submit" form="pettyForm" class="submit-btn" id="submitBtn">Submit</button>
+      <button type="submit" form="pettyForm" class="submit-btn" id="submitBtn" data-i18n="submit">Submit</button>
     </div>
   </div>
 </div>
 
 <div class="overlay" id="overlay">
-  <div class="overlay-card" id="overlayCard">
-    <div class="spinner"></div>
-    <h3>Submitting…</h3>
-    <p>Saving your expense and generating the voucher. This can take up to a minute, especially with photo receipts — please don't close this tab.</p>
-  </div>
+  <div class="overlay-card" id="overlayCard"></div>
 </div>
 
 <script>
+// ============================================================
+// TRANSLATIONS
+// ============================================================
+const I18N = {
+  en: {
+    title: "Petty Cash Submission",
+    subtitle: "Fill in your expenses below — add up to 5 items per submission.",
+    submissionInfo: "Submission Info",
+    company: "Company",
+    selectCompany: "Select company…",
+    errCompany: "Please select a company.",
+    branch: "Branch",
+    allBranches: "ALL BRANCHES",
+    branchHint: 'Leave as "ALL BRANCHES" if this expense covers every Bianca location.',
+    payee: "Payee",
+    payeeOptional: "(optional — defaults to Nuttawat Sakulsantiporn)",
+    payeeDefault: "— Default (Nuttawat Sakulsantiporn) —",
+    dueDate: "Due Date",
+    errDate: "Please select a date.",
+    addItem: "+ Add another item",
+    addItemMax: (n) => `Maximum ${n} items reached`,
+    submit: "Submit",
+    item: "Item",
+    optionalTag: "(optional)",
+    date: "Date",
+    particulars: "Particulars / Details",
+    particularsPlaceholder: "What was this expense for?",
+    errParticulars: "Please describe the expense.",
+    supplier: "Supplier Name",
+    supplierPlaceholder: "e.g. Shopee, Grab, 7-Eleven",
+    errSupplier: "Please enter the supplier.",
+    amount: "Amount (THB)",
+    errAmount: "Please enter a valid amount.",
+    receipt: "Receipt",
+    receiptOptional: "(optional)",
+    uploadLabel: "Tap to take a photo or choose a file",
+    uploadSub: "JPG, PNG, or PDF",
+    removeItem: "Remove this item",
+    itemCount: (n) => n === 1 ? "1 item" : `${n} items`,
+    totalSuffix: " THB",
+    submittingTitle: "Submitting…",
+    submittingBody: "Saving your expense and generating the voucher. This can take up to a minute, especially with photo receipts — please don't close this tab.",
+    successTitle: "Submitted",
+    successBody: (doc) => `Voucher ${doc} has been created and sent to the team.`,
+    errorTitle: "Submission failed",
+    notConnected: "This form has not been connected to the backend yet. Set SUBMIT_URL in the page source.",
+    genericError: "Something went wrong. Please try again or contact finance.",
+    networkError: "Could not reach the server. Check your connection and try again.",
+    submitAnother: "Submit another",
+    tryAgain: "Try again"
+  },
+  th: {
+    title: "ส่งคำขอเบิกเงินสดย่อย",
+    subtitle: "กรอกรายการค่าใช้จ่ายด้านล่าง — เพิ่มได้สูงสุด 5 รายการต่อครั้ง",
+    submissionInfo: "ข้อมูลการส่งคำขอ",
+    company: "บริษัท",
+    selectCompany: "เลือกบริษัท…",
+    errCompany: "กรุณาเลือกบริษัท",
+    branch: "สาขา",
+    allBranches: "ทุกสาขา",
+    branchHint: 'เลือก "ทุกสาขา" หากค่าใช้จ่ายนี้ครอบคลุมทุกสาขาของบิอันก้า',
+    payee: "ผู้รับเงิน",
+    payeeOptional: "(ไม่บังคับ — หากไม่เลือก จะใช้ชื่อ Nuttawat Sakulsantiporn)",
+    payeeDefault: "— ค่าเริ่มต้น (Nuttawat Sakulsantiporn) —",
+    dueDate: "วันครบกำหนด",
+    errDate: "กรุณาเลือกวันที่",
+    addItem: "+ เพิ่มรายการ",
+    addItemMax: (n) => `เพิ่มได้สูงสุด ${n} รายการ`,
+    submit: "ส่งคำขอ",
+    item: "รายการ",
+    optionalTag: "(ไม่บังคับ)",
+    date: "วันที่",
+    particulars: "รายละเอียดค่าใช้จ่าย",
+    particularsPlaceholder: "ค่าใช้จ่ายนี้เกี่ยวกับอะไร?",
+    errParticulars: "กรุณากรอกรายละเอียดค่าใช้จ่าย",
+    supplier: "ชื่อผู้ขาย / ร้านค้า",
+    supplierPlaceholder: "เช่น Shopee, Grab, 7-Eleven",
+    errSupplier: "กรุณากรอกชื่อผู้ขาย",
+    amount: "จำนวนเงิน (บาท)",
+    errAmount: "กรุณากรอกจำนวนเงินให้ถูกต้อง",
+    receipt: "ใบเสร็จ / สลิป",
+    receiptOptional: "(ไม่บังคับ)",
+    uploadLabel: "แตะเพื่อถ่ายรูปหรือเลือกไฟล์",
+    uploadSub: "JPG, PNG หรือ PDF",
+    removeItem: "ลบรายการนี้",
+    itemCount: (n) => `${n} รายการ`,
+    totalSuffix: " บาท",
+    submittingTitle: "กำลังส่งคำขอ…",
+    submittingBody: "กำลังบันทึกค่าใช้จ่ายและสร้างเอกสาร อาจใช้เวลาถึงหนึ่งนาที โดยเฉพาะถ้ามีรูปใบเสร็จ — กรุณาอย่าปิดหน้านี้",
+    successTitle: "ส่งคำขอสำเร็จ",
+    successBody: (doc) => `สร้างเอกสารเลขที่ ${doc} และส่งให้ทีมแล้ว`,
+    errorTitle: "ส่งคำขอไม่สำเร็จ",
+    notConnected: "ฟอร์มนี้ยังไม่ได้เชื่อมต่อกับระบบหลังบ้าน กรุณาตั้งค่า SUBMIT_URL ในซอร์สโค้ดของหน้านี้",
+    genericError: "เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้งหรือติดต่อฝ่ายการเงิน",
+    networkError: "ไม่สามารถเชื่อมต่อกับเซิร์ฟเวอร์ได้ กรุณาตรวจสอบอินเทอร์เน็ตแล้วลองใหม่",
+    submitAnother: "ส่งคำขอใหม่",
+    tryAgain: "ลองใหม่"
+  }
+};
+
+let currentLang = 'en';
+function t(key, ...args) {
+  const entry = I18N[currentLang][key];
+  return typeof entry === 'function' ? entry(...args) : entry;
+}
+
 // ============================================================
 // CONFIG — replace with your deployed Apps Script Web App URL
 // ============================================================
 const SUBMIT_URL = "https://script.google.com/macros/s/AKfycbyrvWzxnhK4lh7NmeorMHTzv2FSMAhTaZa0mmh2PY5Bbw7A1tvGVUEc5mbsRjThxWq2/exec";
 
 const MAX_ITEMS = 5;
-let itemCount = 0;
 
 const itemsContainer = document.getElementById('itemsContainer');
 const addItemBtn = document.getElementById('addItemBtn');
 const companySelect = document.getElementById('company');
 const branchField = document.getElementById('branchField');
+const payeeSelect = document.getElementById('payee');
 const totalAmountEl = document.getElementById('totalAmount');
 const itemCountLabelEl = document.getElementById('itemCountLabel');
 const overlay = document.getElementById('overlay');
 const overlayCard = document.getElementById('overlayCard');
 const submitBtn = document.getElementById('submitBtn');
 
+// ============================================================
+// LANGUAGE TOGGLE
+// ============================================================
+function applyStaticTranslations() {
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.dataset.i18n;
+    const val = t(key);
+    if (typeof val === 'string') el.textContent = val;
+  });
+  document.documentElement.lang = currentLang;
+}
+
+function rerenderDynamicText() {
+  // Item blocks contain JS-generated text that data-i18n can't reach
+  // directly (labels built at creation time) — refresh them in place.
+  itemsContainer.querySelectorAll('.item-block').forEach(block => {
+    refreshItemBlockText(block);
+  });
+  updateAddButton();
+  updateTotal();
+}
+
+document.getElementById('langEn').addEventListener('click', () => setLang('en'));
+document.getElementById('langTh').addEventListener('click', () => setLang('th'));
+
+function setLang(lang) {
+  currentLang = lang;
+  document.getElementById('langEn').classList.toggle('active', lang === 'en');
+  document.getElementById('langTh').classList.toggle('active', lang === 'th');
+  applyStaticTranslations();
+  rerenderDynamicText();
+}
+
+// ============================================================
+// ITEM BLOCKS
+// ============================================================
 function buildItemBlock(n) {
   const wrap = document.createElement('div');
   wrap.className = 'card item-block';
   wrap.dataset.itemIndex = n;
+  wrap.innerHTML = itemBlockHtml(n);
 
-  wrap.innerHTML = `
-    <div class="item-number">${n}</div>
-    <h2>Item ${n}${n === 1 ? '' : ' <span class="optional" style="text-transform:none;font-weight:400;">(optional)</span>'}</h2>
-
-    <div class="field" data-field="date">
-      <label>Date</label>
-      <input type="date" class="item-date" ${n === 1 ? 'required' : ''}>
-      <div class="error-text">Please select a date.</div>
-    </div>
-
-    <div class="field" data-field="particulars">
-      <label>Particulars / Details</label>
-      <input type="text" class="item-particulars" placeholder="What was this expense for?" ${n === 1 ? 'required' : ''}>
-      <div class="error-text">Please describe the expense.</div>
-    </div>
-
-    <div class="field" data-field="supplier">
-      <label>Supplier Name</label>
-      <input type="text" class="item-supplier" placeholder="e.g. Shopee, Grab, 7-Eleven" ${n === 1 ? 'required' : ''}>
-      <div class="error-text">Please enter the supplier.</div>
-    </div>
-
-    <div class="field" data-field="amount">
-      <label>Amount (THB)</label>
-      <input type="number" class="item-amount" inputmode="decimal" step="0.01" min="0" placeholder="0.00" ${n === 1 ? 'required' : ''}>
-      <div class="error-text">Please enter a valid amount.</div>
-    </div>
-
-    <div class="field" data-field="receipt">
-      <label>Receipt <span class="optional">${n === 1 ? '' : '(optional)'}</span></label>
-      <div class="upload-zone">
-        <input type="file" class="item-receipt" accept="image/*,application/pdf" capture="environment">
-        <div class="upload-label">Tap to take a photo or choose a file</div>
-        <div class="upload-sub">JPG, PNG, or PDF</div>
-      </div>
-      <div class="upload-preview" style="display:none;"></div>
-    </div>
-
-    ${n > 1 ? '<button type="button" class="remove-item">Remove this item</button>' : ''}
-  `;
-
-  // Total recalculation on amount input
   wrap.querySelector('.item-amount').addEventListener('input', updateTotal);
 
-  // File preview + client-side image compression
   const fileInput = wrap.querySelector('.item-receipt');
   const uploadZone = wrap.querySelector('.upload-zone');
   const previewEl = wrap.querySelector('.upload-preview');
@@ -536,7 +653,6 @@ function buildItemBlock(n) {
     uploadZone.classList.add('has-file');
     let displayUrl = '';
     let processedBase64 = null;
-    let processedFileName = file.name;
 
     if (file.type.startsWith('image/')) {
       const result = await compressImage(file);
@@ -544,11 +660,10 @@ function buildItemBlock(n) {
       displayUrl = result.base64;
     } else if (file.type === 'application/pdf') {
       processedBase64 = await fileToBase64(file);
-      displayUrl = '';
     }
 
     wrap.dataset.receiptBase64 = processedBase64 || '';
-    wrap.dataset.receiptFileName = processedFileName;
+    wrap.dataset.receiptFileName = file.name;
 
     previewEl.style.display = 'flex';
     previewEl.innerHTML = `
@@ -557,7 +672,6 @@ function buildItemBlock(n) {
     `;
   });
 
-  // Remove button
   const removeBtn = wrap.querySelector('.remove-item');
   if (removeBtn) {
     removeBtn.addEventListener('click', () => {
@@ -569,6 +683,122 @@ function buildItemBlock(n) {
   }
 
   return wrap;
+}
+
+function itemBlockHtml(n) {
+  const isFirst = n === 1;
+  return `
+    <div class="item-number">${n}</div>
+    <h2>${t('item')} ${n}${isFirst ? '' : ' <span class="optional" style="text-transform:none;font-weight:400;">' + t('optionalTag') + '</span>'}</h2>
+
+    <div class="field" data-field="date">
+      <label>${t('date')}</label>
+      <input type="date" class="item-date" ${isFirst ? 'required' : ''}>
+      <div class="error-text">${t('errDate')}</div>
+    </div>
+
+    <div class="field" data-field="particulars">
+      <label>${t('particulars')}</label>
+      <input type="text" class="item-particulars" placeholder="${t('particularsPlaceholder')}" ${isFirst ? 'required' : ''}>
+      <div class="error-text">${t('errParticulars')}</div>
+    </div>
+
+    <div class="field" data-field="supplier">
+      <label>${t('supplier')}</label>
+      <input type="text" class="item-supplier" placeholder="${t('supplierPlaceholder')}" ${isFirst ? 'required' : ''}>
+      <div class="error-text">${t('errSupplier')}</div>
+    </div>
+
+    <div class="field" data-field="amount">
+      <label>${t('amount')}</label>
+      <input type="number" class="item-amount" inputmode="decimal" step="0.01" min="0" placeholder="0.00" ${isFirst ? 'required' : ''}>
+      <div class="error-text">${t('errAmount')}</div>
+    </div>
+
+    <div class="field" data-field="receipt">
+      <label>${t('receipt')} <span class="optional">${t('receiptOptional')}</span></label>
+      <div class="upload-zone">
+        <input type="file" class="item-receipt" accept="image/*,application/pdf" capture="environment">
+        <div class="upload-label">${t('uploadLabel')}</div>
+        <div class="upload-sub">${t('uploadSub')}</div>
+      </div>
+      <div class="upload-preview" style="display:none;"></div>
+    </div>
+
+    ${!isFirst ? `<button type="button" class="remove-item">${t('removeItem')}</button>` : ''}
+  `;
+}
+
+// When the language changes, item blocks need their text refreshed WITHOUT
+// losing whatever the person already typed into the inputs.
+function refreshItemBlockText(block) {
+  const n = parseInt(block.dataset.itemIndex, 10);
+  const isFirst = n === 1;
+
+  // Save current values
+  const saved = {
+    date: block.querySelector('.item-date')?.value || '',
+    particulars: block.querySelector('.item-particulars')?.value || '',
+    supplier: block.querySelector('.item-supplier')?.value || '',
+    amount: block.querySelector('.item-amount')?.value || '',
+  };
+  const preview = block.querySelector('.upload-preview');
+  const previewHtml = preview ? preview.innerHTML : '';
+  const previewDisplay = preview ? preview.style.display : 'none';
+  const hasFileClass = block.querySelector('.upload-zone')?.classList.contains('has-file');
+
+  block.innerHTML = itemBlockHtml(n);
+
+  block.querySelector('.item-date').value = saved.date;
+  block.querySelector('.item-particulars').value = saved.particulars;
+  block.querySelector('.item-supplier').value = saved.supplier;
+  block.querySelector('.item-amount').value = saved.amount;
+
+  if (previewHtml) {
+    const newPreview = block.querySelector('.upload-preview');
+    newPreview.innerHTML = previewHtml;
+    newPreview.style.display = previewDisplay;
+  }
+  if (hasFileClass) block.querySelector('.upload-zone').classList.add('has-file');
+
+  // Re-wire events (innerHTML replacement wiped the old listeners)
+  block.querySelector('.item-amount').addEventListener('input', updateTotal);
+
+  const fileInput = block.querySelector('.item-receipt');
+  const uploadZone = block.querySelector('.upload-zone');
+  const previewEl = block.querySelector('.upload-preview');
+
+  fileInput.addEventListener('change', async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    uploadZone.classList.add('has-file');
+    let displayUrl = '';
+    let processedBase64 = null;
+    if (file.type.startsWith('image/')) {
+      const result = await compressImage(file);
+      processedBase64 = result.base64;
+      displayUrl = result.base64;
+    } else if (file.type === 'application/pdf') {
+      processedBase64 = await fileToBase64(file);
+    }
+    block.dataset.receiptBase64 = processedBase64 || '';
+    block.dataset.receiptFileName = file.name;
+    previewEl.style.display = 'flex';
+    previewEl.innerHTML = `
+      ${displayUrl ? `<img src="${displayUrl}" alt="">` : '<div style="width:52px;height:52px;border-radius:6px;background:var(--purple-light);display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--purple);font-weight:700;">PDF</div>'}
+      <div class="file-meta"><strong>${escapeHtml(file.name)}</strong>${(file.size/1024).toFixed(0)} KB</div>
+    `;
+  });
+
+  const removeBtn = block.querySelector('.remove-item');
+  if (removeBtn) {
+    removeBtn.addEventListener('click', () => {
+      block.remove();
+      renumberItems();
+      updateTotal();
+      updateAddButton();
+    });
+  }
 }
 
 function escapeHtml(str) {
@@ -586,13 +816,10 @@ function fileToBase64(file) {
   });
 }
 
-// Resize/compress images client-side before sending, so large phone
-// photos don't blow past the Apps Script POST body size limit.
 function compressImage(file, maxDimension = 1600, quality = 0.75) {
   return new Promise((resolve, reject) => {
     const img = new Image();
     const reader = new FileReader();
-
     reader.onload = (e) => {
       img.onload = () => {
         let { width, height } = img;
@@ -603,13 +830,11 @@ function compressImage(file, maxDimension = 1600, quality = 0.75) {
           width = Math.round(width * (maxDimension / height));
           height = maxDimension;
         }
-
         const canvas = document.createElement('canvas');
         canvas.width = width;
         canvas.height = height;
         const ctx = canvas.getContext('2d');
         ctx.drawImage(img, 0, 0, width, height);
-
         const base64 = canvas.toDataURL('image/jpeg', quality);
         resolve({ base64, width, height });
       };
@@ -628,29 +853,24 @@ function renumberItems() {
     block.dataset.itemIndex = n;
     block.querySelector('.item-number').textContent = n;
     const h2 = block.querySelector('h2');
-    h2.innerHTML = `Item ${n}${n === 1 ? '' : ' <span class="optional" style="text-transform:none;font-weight:400;">(optional)</span>'}`;
+    h2.innerHTML = `${t('item')} ${n}${n === 1 ? '' : ' <span class="optional" style="text-transform:none;font-weight:400;">' + t('optionalTag') + '</span>'}`;
   });
-  itemCount = blocks.length;
 }
 
 function updateAddButton() {
   const blocks = itemsContainer.querySelectorAll('.item-block').length;
   addItemBtn.disabled = blocks >= MAX_ITEMS;
-  addItemBtn.textContent = blocks >= MAX_ITEMS
-    ? `Maximum ${MAX_ITEMS} items reached`
-    : '+ Add another item';
+  addItemBtn.textContent = blocks >= MAX_ITEMS ? t('addItemMax', MAX_ITEMS) : t('addItem');
 }
 
 function updateTotal() {
   const amounts = itemsContainer.querySelectorAll('.item-amount');
   let total = 0;
-  amounts.forEach(input => {
-    total += parseFloat(input.value) || 0;
-  });
-  totalAmountEl.textContent = total.toFixed(2) + ' THB';
+  amounts.forEach(input => { total += parseFloat(input.value) || 0; });
+  totalAmountEl.textContent = total.toFixed(2) + t('totalSuffix');
 
   const n = itemsContainer.querySelectorAll('.item-block').length;
-  itemCountLabelEl.textContent = n + (n === 1 ? ' item' : ' items');
+  itemCountLabelEl.textContent = t('itemCount', n);
 }
 
 addItemBtn.addEventListener('click', () => {
@@ -669,15 +889,43 @@ companySelect.addEventListener('change', () => {
   branchField.style.display = companySelect.value === 'BIANCA HOLDING' ? 'block' : 'none';
 });
 
-// ---- Initial state: always start with Item 1 ----
+// ---- Initial state ----
 itemsContainer.appendChild(buildItemBlock(1));
 updateAddButton();
 updateTotal();
 
 // ============================================================
+// PAYEE DROPDOWN — populated live from the "Payees" sheet tab
+// ============================================================
+async function loadPayees() {
+  if (SUBMIT_URL.indexOf('PASTE_YOUR') === 0) return; // not configured yet
+
+  try {
+    const res = await fetch(SUBMIT_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify({ action: 'getPayees' })
+    });
+    const data = await res.json();
+    const names = Array.isArray(data.payees) ? data.payees : [];
+
+    names.forEach(name => {
+      const opt = document.createElement('option');
+      opt.value = name;
+      opt.textContent = name;
+      payeeSelect.appendChild(opt);
+    });
+  } catch (err) {
+    // Silent fail — the default option (blank = uses fallback name server-side)
+    // still works fine even if the live list couldn't be fetched.
+    console.warn('Could not load payees list:', err);
+  }
+}
+loadPayees();
+
+// ============================================================
 // VALIDATION + SUBMIT
 // ============================================================
-
 function setFieldError(fieldEl, isInvalid) {
   fieldEl.classList.toggle('invalid', isInvalid);
 }
@@ -685,18 +933,15 @@ function setFieldError(fieldEl, isInvalid) {
 function validateForm() {
   let valid = true;
 
-  // Company
   const companyField = document.querySelector('[data-field="company"]');
   if (!companySelect.value) { setFieldError(companyField, true); valid = false; }
   else setFieldError(companyField, false);
 
-  // Due date
   const dueDateField = document.querySelector('[data-field="dueDate"]');
   const dueDateInput = document.getElementById('dueDate');
   if (!dueDateInput.value) { setFieldError(dueDateField, true); valid = false; }
   else setFieldError(dueDateField, false);
 
-  // Item 1 required fields
   const firstBlock = itemsContainer.querySelector('.item-block[data-item-index="1"]');
   if (firstBlock) {
     const checks = [
@@ -714,8 +959,6 @@ function validateForm() {
     });
   }
 
-  // Items 2-5: if ANY field is filled, ALL core fields must be filled —
-  // otherwise the item would silently be dropped, which is confusing.
   const otherBlocks = itemsContainer.querySelectorAll('.item-block:not([data-item-index="1"])');
   otherBlocks.forEach(block => {
     const dateInput = block.querySelector('.item-date');
@@ -741,14 +984,12 @@ function validateForm() {
         amount: ['.item-amount', 'amount']
       };
       Object.entries(fieldMap).forEach(([key, [selector, fieldName]]) => {
-        const input = block.querySelector(selector);
         const fieldEl = block.querySelector(`[data-field="${fieldName}"]`);
         const isEmpty = key === 'amount' ? values.amount <= 0 : !values[key];
         setFieldError(fieldEl, isEmpty);
         if (isEmpty) valid = false;
       });
     } else {
-      // Fully empty or fully filled — clear any stale error state
       block.querySelectorAll('.field').forEach(f => setFieldError(f, false));
     }
   });
@@ -767,17 +1008,14 @@ function collectPayload() {
       const amount = parseFloat(block.querySelector('.item-amount').value) || 0;
       const receiptBase64 = block.dataset.receiptBase64 || '';
       const receiptFileName = block.dataset.receiptFileName || '';
-
       return { date, particulars, supplier, amount, receiptBase64, receiptFileName };
     })
-    // An item only counts if ALL core fields are filled together — a stray
-    // amount with no date/particulars/supplier is not a valid line item.
     .filter(item => item.date && item.particulars && item.supplier && item.amount > 0);
 
   return {
     company: companySelect.value,
     branch: companySelect.value === 'BIANCA HOLDING' ? document.getElementById('branch').value : '',
-    payee: document.getElementById('payee').value.trim(),
+    payee: payeeSelect.value,
     dueDate: document.getElementById('dueDate').value,
     items
   };
@@ -789,31 +1027,27 @@ function showOverlay(state, message) {
     overlayCard.className = 'overlay-card';
     overlayCard.innerHTML = `
       <div class="spinner"></div>
-      <h3>Submitting…</h3>
-      <p>Saving your expense and generating the voucher. This can take up to a minute, especially with photo receipts — please don't close this tab.</p>
+      <h3>${t('submittingTitle')}</h3>
+      <p>${t('submittingBody')}</p>
     `;
   } else if (state === 'success') {
     overlayCard.className = 'overlay-card success';
     overlayCard.innerHTML = `
       <div class="icon">✅</div>
-      <h3>Submitted</h3>
+      <h3>${t('successTitle')}</h3>
       <p>${message}</p>
-      <button type="button" id="overlayCloseBtn">Submit another</button>
+      <button type="button" id="overlayCloseBtn">${t('submitAnother')}</button>
     `;
-    document.getElementById('overlayCloseBtn').addEventListener('click', () => {
-      window.location.reload();
-    });
+    document.getElementById('overlayCloseBtn').addEventListener('click', () => window.location.reload());
   } else if (state === 'error') {
     overlayCard.className = 'overlay-card error';
     overlayCard.innerHTML = `
       <div class="icon">⚠️</div>
-      <h3>Submission failed</h3>
+      <h3>${t('errorTitle')}</h3>
       <p>${message}</p>
-      <button type="button" id="overlayCloseBtn">Try again</button>
+      <button type="button" id="overlayCloseBtn">${t('tryAgain')}</button>
     `;
-    document.getElementById('overlayCloseBtn').addEventListener('click', () => {
-      overlay.classList.remove('show');
-    });
+    document.getElementById('overlayCloseBtn').addEventListener('click', () => overlay.classList.remove('show'));
   }
 }
 
@@ -829,7 +1063,7 @@ document.getElementById('pettyForm').addEventListener('submit', async (e) => {
   }
 
   if (SUBMIT_URL.indexOf('PASTE_YOUR') === 0) {
-    showOverlay('error', 'This form has not been connected to the backend yet. Set SUBMIT_URL in the page source.');
+    showOverlay('error', t('notConnected'));
     return;
   }
 
@@ -847,13 +1081,13 @@ document.getElementById('pettyForm').addEventListener('submit', async (e) => {
     const data = await res.json();
 
     if (data.success) {
-      showOverlay('success', `Voucher ${data.docNumber} has been created and sent to the team.`);
+      showOverlay('success', t('successBody', data.docNumber));
     } else {
-      showOverlay('error', data.error || 'Something went wrong. Please try again or contact finance.');
+      showOverlay('error', data.error || t('genericError'));
       submitBtn.disabled = false;
     }
   } catch (err) {
-    showOverlay('error', 'Could not reach the server. Check your connection and try again.');
+    showOverlay('error', t('networkError'));
     submitBtn.disabled = false;
   }
 });
