@@ -30,11 +30,7 @@
     -webkit-font-smoothing: antialiased;
   }
 
-  .app {
-    max-width: 560px;
-    margin: 0 auto;
-    padding: 0 16px 140px;
-  }
+  .app { max-width: 560px; margin: 0 auto; padding: 0 16px 140px; }
 
   header.top {
     position: sticky;
@@ -51,18 +47,8 @@
     gap: 12px;
   }
 
-  header.top .heading h1 {
-    font-size: 19px;
-    margin: 0;
-    font-weight: 700;
-    letter-spacing: -0.01em;
-  }
-
-  header.top .heading p {
-    margin: 4px 0 0;
-    font-size: 13px;
-    opacity: 0.85;
-  }
+  header.top .heading h1 { font-size: 19px; margin: 0; font-weight: 700; letter-spacing: -0.01em; }
+  header.top .heading p { margin: 4px 0 0; font-size: 13px; opacity: 0.85; }
 
   .lang-toggle {
     flex-shrink: 0;
@@ -74,22 +60,12 @@
   }
 
   .lang-toggle button {
-    border: none;
-    background: transparent;
-    color: white;
-    font-size: 12.5px;
-    font-weight: 700;
-    padding: 6px 12px;
-    border-radius: 17px;
-    cursor: pointer;
-    opacity: 0.7;
+    border: none; background: transparent; color: white;
+    font-size: 12.5px; font-weight: 700; padding: 6px 12px;
+    border-radius: 17px; cursor: pointer; opacity: 0.7;
   }
 
-  .lang-toggle button.active {
-    background: white;
-    color: var(--purple-dark);
-    opacity: 1;
-  }
+  .lang-toggle button.active { background: white; color: var(--purple-dark); opacity: 1; }
 
   .card {
     background: var(--white);
@@ -101,298 +77,165 @@
   }
 
   .card h2 {
-    font-size: 14px;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: var(--purple);
-    margin: 0 0 14px;
-    font-weight: 700;
+    font-size: 14px; text-transform: uppercase; letter-spacing: 0.06em;
+    color: var(--purple); margin: 0 0 14px; font-weight: 700;
   }
 
-  .field {
-    margin-bottom: 14px;
-  }
-
+  .field { margin-bottom: 14px; }
   .field:last-child { margin-bottom: 0; }
 
-  .field label {
-    display: block;
-    font-size: 13.5px;
-    font-weight: 600;
-    color: var(--ink);
-    margin-bottom: 6px;
+  .field label { display: block; font-size: 13.5px; font-weight: 600; color: var(--ink); margin-bottom: 6px; }
+  .field label .optional { color: var(--ink-soft); font-weight: 400; font-size: 12.5px; }
+
+  .field input[type="text"], .field input[type="number"], .field input[type="date"], .field select {
+    width: 100%; padding: 12px 14px; font-size: 16px;
+    border: 1.5px solid var(--line); border-radius: 8px;
+    background: var(--white); color: var(--ink); font-family: inherit;
   }
 
-  .field label .optional {
-    color: var(--ink-soft);
-    font-weight: 400;
-    font-size: 12.5px;
+  .field input:focus, .field select:focus {
+    outline: none; border-color: var(--purple); box-shadow: 0 0 0 3px var(--purple-light);
   }
 
-  .field input[type="text"],
-  .field input[type="number"],
-  .field input[type="date"],
-  .field select {
-    width: 100%;
-    padding: 12px 14px;
-    font-size: 16px;
-    border: 1.5px solid var(--line);
-    border-radius: 8px;
-    background: var(--white);
-    color: var(--ink);
-    font-family: inherit;
+  .field .hint { font-size: 12px; color: var(--ink-soft); margin-top: 5px; }
+
+  /* Company picker checkboxes */
+  .company-picker { display: flex; flex-direction: column; gap: 10px; }
+
+  .company-option {
+    display: flex; align-items: center; gap: 12px;
+    border: 1.5px solid var(--line); border-radius: 8px;
+    padding: 13px 14px; cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
   }
 
-  .field input:focus,
-  .field select:focus {
-    outline: none;
-    border-color: var(--purple);
-    box-shadow: 0 0 0 3px var(--purple-light);
+  .company-option:has(input:checked) { border-color: var(--purple); background: var(--purple-light); }
+
+  .company-option input[type="checkbox"] {
+    width: 20px; height: 20px; flex-shrink: 0; accent-color: var(--purple); cursor: pointer;
   }
 
-  .field .hint {
-    font-size: 12px;
-    color: var(--ink-soft);
-    margin-top: 5px;
+  .company-option .company-name { font-size: 14.5px; font-weight: 600; color: var(--ink); }
+
+  .error-text-block {
+    color: var(--danger); font-size: 12.5px; margin-top: 8px; display: none;
   }
+  .error-text-block.show { display: block; }
 
   .upload-zone {
-    border: 1.5px dashed var(--line);
-    border-radius: 8px;
-    padding: 16px;
-    text-align: center;
-    cursor: pointer;
-    transition: border-color 0.15s, background 0.15s;
-    position: relative;
+    border: 1.5px dashed var(--line); border-radius: 8px; padding: 16px;
+    text-align: center; cursor: pointer; transition: border-color 0.15s, background 0.15s; position: relative;
   }
+  .upload-zone:hover, .upload-zone.has-file { border-color: var(--purple); background: var(--purple-light); }
+  .upload-zone input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+  .upload-zone .upload-label { font-size: 13.5px; color: var(--purple); font-weight: 600; }
+  .upload-zone .upload-sub { font-size: 12px; color: var(--ink-soft); margin-top: 2px; }
 
-  .upload-zone:hover, .upload-zone.has-file {
-    border-color: var(--purple);
-    background: var(--purple-light);
-  }
+  .upload-preview { margin-top: 10px; display: flex; align-items: center; gap: 10px; }
+  .upload-preview img { width: 52px; height: 52px; object-fit: cover; border-radius: 6px; border: 1px solid var(--line); }
+  .upload-preview .file-meta { font-size: 12.5px; color: var(--ink-soft); flex: 1; text-align: left; }
+  .upload-preview .file-meta strong { color: var(--ink); display: block; word-break: break-all; }
 
-  .upload-zone input[type="file"] {
-    position: absolute;
-    inset: 0;
-    opacity: 0;
-    cursor: pointer;
-  }
-
-  .upload-zone .upload-label {
-    font-size: 13.5px;
-    color: var(--purple);
-    font-weight: 600;
-  }
-
-  .upload-zone .upload-sub {
-    font-size: 12px;
-    color: var(--ink-soft);
-    margin-top: 2px;
-  }
-
-  .upload-preview {
-    margin-top: 10px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .upload-preview img {
-    width: 52px;
-    height: 52px;
-    object-fit: cover;
-    border-radius: 6px;
-    border: 1px solid var(--line);
-  }
-
-  .upload-preview .file-meta {
-    font-size: 12.5px;
-    color: var(--ink-soft);
-    flex: 1;
-    text-align: left;
-  }
-
-  .upload-preview .file-meta strong {
-    color: var(--ink);
-    display: block;
-    word-break: break-all;
-  }
-
-  .item-block {
-    position: relative;
-  }
-
+  .item-block { position: relative; }
   .item-block .item-number {
-    position: absolute;
-    top: 18px;
-    right: 18px;
-    font-size: 26px;
-    font-weight: 800;
-    color: var(--purple-light);
-    line-height: 1;
+    position: absolute; top: 18px; right: 18px;
+    font-size: 26px; font-weight: 800; color: var(--purple-light); line-height: 1;
   }
-
   .item-block .remove-item {
-    background: none;
-    border: none;
-    color: var(--ink-soft);
-    font-size: 13px;
-    cursor: pointer;
-    padding: 4px 0;
-    text-decoration: underline;
+    background: none; border: none; color: var(--ink-soft); font-size: 13px;
+    cursor: pointer; padding: 4px 0; text-decoration: underline;
   }
-
   .item-block .remove-item:hover { color: var(--danger); }
 
   .add-item-btn {
-    width: 100%;
-    padding: 14px;
-    border: 1.5px dashed var(--purple);
-    background: var(--white);
-    color: var(--purple);
-    border-radius: var(--radius);
-    font-size: 15px;
-    font-weight: 600;
-    cursor: pointer;
-    margin-bottom: 16px;
+    width: 100%; padding: 14px; border: 1.5px dashed var(--purple);
+    background: var(--white); color: var(--purple); border-radius: var(--radius);
+    font-size: 15px; font-weight: 600; cursor: pointer; margin-bottom: 16px;
+  }
+  .add-item-btn:active { background: var(--purple-light); }
+  .add-item-btn:disabled { border-color: var(--line); color: var(--ink-soft); cursor: not-allowed; }
+
+  /* Company section wrapper — groups one company's branch + items + add button */
+  .company-section {
+    border-left: 3px solid var(--purple);
+    padding-left: 14px;
+    margin-bottom: 22px;
   }
 
-  .add-item-btn:active { background: var(--purple-light); }
+  .company-section-title {
+    font-size: 15.5px;
+    font-weight: 800;
+    color: var(--purple-dark);
+    margin: 0 0 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
 
-  .add-item-btn:disabled {
-    border-color: var(--line);
+  .company-section-title .company-total {
+    font-size: 12.5px;
+    font-weight: 600;
     color: var(--ink-soft);
-    cursor: not-allowed;
+    margin-left: auto;
   }
 
   .total-bar {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: var(--white);
-    border-top: 1px solid var(--line);
-    padding: 14px 16px;
-    box-shadow: 0 -2px 12px rgba(28,27,31,0.08);
-    z-index: 20;
+    position: fixed; bottom: 0; left: 0; right: 0;
+    background: var(--white); border-top: 1px solid var(--line);
+    padding: 14px 16px; box-shadow: 0 -2px 12px rgba(28,27,31,0.08); z-index: 20;
   }
 
   .total-bar-inner {
-    max-width: 560px;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
+    max-width: 560px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
   }
 
   .total-info { line-height: 1.2; }
-
-  .total-info .label {
-    font-size: 11.5px;
-    color: var(--ink-soft);
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-  }
-
-  .total-info .amount {
-    font-size: 21px;
-    font-weight: 800;
-    color: var(--purple-dark);
-  }
+  .total-info .label { font-size: 11.5px; color: var(--ink-soft); text-transform: uppercase; letter-spacing: 0.04em; }
+  .total-info .amount { font-size: 21px; font-weight: 800; color: var(--purple-dark); }
 
   .submit-btn {
-    flex-shrink: 0;
-    background: var(--purple);
-    color: white;
-    border: none;
-    padding: 14px 26px;
-    font-size: 15.5px;
-    font-weight: 700;
-    border-radius: 10px;
-    cursor: pointer;
+    flex-shrink: 0; background: var(--purple); color: white; border: none;
+    padding: 14px 26px; font-size: 15.5px; font-weight: 700; border-radius: 10px; cursor: pointer;
   }
-
   .submit-btn:active { background: var(--purple-dark); }
-
-  .submit-btn:disabled {
-    background: var(--line);
-    color: var(--ink-soft);
-    cursor: not-allowed;
-  }
+  .submit-btn:disabled { background: var(--line); color: var(--ink-soft); cursor: not-allowed; }
 
   .overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(28,27,31,0.45);
-    display: none;
-    align-items: center;
-    justify-content: center;
-    z-index: 50;
-    padding: 20px;
+    position: fixed; inset: 0; background: rgba(28,27,31,0.45);
+    display: none; align-items: center; justify-content: center; z-index: 50; padding: 20px;
   }
-
   .overlay.show { display: flex; }
 
-  .overlay-card {
-    background: white;
-    border-radius: 14px;
-    padding: 28px 24px;
-    max-width: 380px;
-    width: 100%;
-    text-align: center;
-  }
-
+  .overlay-card { background: white; border-radius: 14px; padding: 28px 24px; max-width: 380px; width: 100%; text-align: center; }
   .overlay-card .spinner {
-    width: 36px;
-    height: 36px;
-    border: 3px solid var(--purple-light);
-    border-top-color: var(--purple);
-    border-radius: 50%;
-    margin: 0 auto 16px;
-    animation: spin 0.8s linear infinite;
+    width: 36px; height: 36px; border: 3px solid var(--purple-light); border-top-color: var(--purple);
+    border-radius: 50%; margin: 0 auto 16px; animation: spin 0.8s linear infinite;
   }
-
   @keyframes spin { to { transform: rotate(360deg); } }
-
   .overlay-card h3 { margin: 0 0 6px; font-size: 17px; }
   .overlay-card p { margin: 0; font-size: 13.5px; color: var(--ink-soft); }
-
-  .overlay-card.success .icon, .overlay-card.error .icon {
-    font-size: 38px;
-    margin-bottom: 10px;
-  }
-
+  .overlay-card.success .icon, .overlay-card.error .icon, .overlay-card.partial .icon { font-size: 38px; margin-bottom: 10px; }
   .overlay-card.success h3 { color: var(--ok); }
   .overlay-card.error h3 { color: var(--danger); }
+  .overlay-card.partial h3 { color: #B8860B; }
+
+  .result-list { text-align: left; margin: 14px 0 0; padding: 0; list-style: none; font-size: 13px; }
+  .result-list li { padding: 6px 0; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; gap: 8px; }
+  .result-list li:last-child { border-bottom: none; }
+  .result-list .ok { color: var(--ok); font-weight: 600; }
+  .result-list .fail { color: var(--danger); font-weight: 600; }
 
   .overlay-card button {
-    margin-top: 18px;
-    background: var(--purple);
-    color: white;
-    border: none;
-    padding: 10px 22px;
-    border-radius: 8px;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
+    margin-top: 18px; background: var(--purple); color: white; border: none;
+    padding: 10px 22px; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer;
   }
 
-  .error-text {
-    color: var(--danger);
-    font-size: 12.5px;
-    margin-top: 6px;
-    display: none;
-  }
-
-  .field.invalid input,
-  .field.invalid select { border-color: var(--danger); }
-
+  .error-text { color: var(--danger); font-size: 12.5px; margin-top: 6px; display: none; }
+  .field.invalid input, .field.invalid select { border-color: var(--danger); }
   .field.invalid .error-text { display: block; }
 
-  @media (prefers-reduced-motion: reduce) {
-    .spinner { animation: none; border-top-color: var(--purple-light); }
-  }
+  @media (prefers-reduced-motion: reduce) { .spinner { animation: none; border-top-color: var(--purple-light); } }
 </style>
 </head>
 <body>
@@ -401,7 +244,7 @@
   <header class="top">
     <div class="heading">
       <h1 data-i18n="title">Petty Cash Submission</h1>
-      <p data-i18n="subtitle">Fill in your expenses below — add up to 5 items per submission.</p>
+      <p data-i18n="subtitle">Select one or more companies and fill in expenses for each — up to 5 items per company.</p>
     </div>
     <div class="lang-toggle">
       <button type="button" id="langEn" class="active">EN</button>
@@ -412,50 +255,43 @@
   <form id="pettyForm" novalidate>
 
     <div class="card">
+      <h2 data-i18n="selectCompaniesHeading">Select Companies</h2>
+      <div class="company-picker" id="companyPicker">
+        <label class="company-option">
+          <input type="checkbox" class="company-checkbox" value="BIANCA HOLDING">
+          <span class="company-name">BIANCA HOLDING</span>
+        </label>
+        <label class="company-option">
+          <input type="checkbox" class="company-checkbox" value="HOLY BELLY EMS">
+          <span class="company-name">HOLY BELLY EMS</span>
+        </label>
+        <label class="company-option">
+          <input type="checkbox" class="company-checkbox" value="LOVA HOSPITALITY">
+          <span class="company-name">LOVA HOSPITALITY</span>
+        </label>
+      </div>
+      <div class="error-text-block" id="companyPickerError" data-i18n="errNoCompany">Please select at least one company.</div>
+    </div>
+
+    <div class="card">
       <h2 data-i18n="submissionInfo">Submission Info</h2>
-
-      <div class="field" data-field="company">
-        <label for="company" data-i18n="company">Company</label>
-        <select id="company" name="company" required>
-          <option value="" disabled selected data-i18n="selectCompany">Select company…</option>
-          <option value="BIANCA HOLDING">BIANCA HOLDING</option>
-          <option value="HOLY BELLY EMS">HOLY BELLY EMS</option>
-          <option value="LOVA HOSPITALITY">LOVA HOSPITALITY</option>
-        </select>
-        <div class="error-text" data-i18n="errCompany">Please select a company.</div>
-      </div>
-
-      <div class="field" id="branchField" data-field="branch" style="display:none;">
-        <label for="branch" data-i18n="branch">Branch</label>
-        <select id="branch" name="branch">
-          <option value="" data-i18n="allBranches">ALL BRANCHES</option>
-          <option value="BIANCA EMSPHERE">BIANCA EMSPHERE</option>
-          <option value="BIANCA ONE BANGKOK">BIANCA ONE BANGKOK</option>
-          <option value="BIANCA ICONSIAM">BIANCA ICONSIAM</option>
-          <option value="BIANCA TERMINAL 21">BIANCA TERMINAL 21</option>
-          <option value="BIANCA SIAM PARAGON">BIANCA SIAM PARAGON</option>
-        </select>
-        <div class="hint" data-i18n="branchHint">Leave as "ALL BRANCHES" if this expense covers every Bianca location.</div>
-      </div>
-
       <div class="field" data-field="payee">
         <label for="payee"><span data-i18n="payee">Payee</span> <span class="optional" data-i18n="payeeOptional">(optional — defaults to Nuttawat Sakulsantiporn)</span></label>
         <select id="payee" name="payee">
           <option value="" data-i18n="payeeDefault">— Default (Nuttawat Sakulsantiporn) —</option>
         </select>
+        <div class="hint" data-i18n="payeeSharedHint">This payee applies to every company selected above.</div>
       </div>
     </div>
 
-    <div id="itemsContainer"></div>
-
-    <button type="button" class="add-item-btn" id="addItemBtn" data-i18n="addItem">+ Add another item</button>
+    <div id="companySectionsContainer"></div>
 
   </form>
 
   <div class="total-bar">
     <div class="total-bar-inner">
       <div class="total-info">
-        <div class="label" id="itemCountLabel">1 item</div>
+        <div class="label" id="itemCountLabel">0 companies selected</div>
         <div class="amount" id="totalAmount">0.00 THB</div>
       </div>
       <button type="submit" form="pettyForm" class="submit-btn" id="submitBtn" data-i18n="submit">Submit</button>
@@ -474,18 +310,17 @@
 const I18N = {
   en: {
     title: "Petty Cash Submission",
-    subtitle: "Fill in your expenses below — add up to 5 items per submission.",
+    subtitle: "Select one or more companies and fill in expenses for each — up to 5 items per company.",
+    selectCompaniesHeading: "Select Companies",
+    errNoCompany: "Please select at least one company.",
     submissionInfo: "Submission Info",
-    company: "Company",
-    selectCompany: "Select company…",
-    errCompany: "Please select a company.",
-    branch: "Branch",
-    allBranches: "ALL BRANCHES",
-    branchHint: 'Leave as "ALL BRANCHES" if this expense covers every Bianca location.',
     payee: "Payee",
     payeeOptional: "(optional — defaults to Nuttawat Sakulsantiporn)",
     payeeDefault: "— Default (Nuttawat Sakulsantiporn) —",
-    errDate: "Please select a date.",
+    payeeSharedHint: "This payee applies to every company selected above.",
+    branch: "Branch",
+    allBranches: "ALL BRANCHES",
+    branchHint: 'Leave as "ALL BRANCHES" if this expense covers every Bianca location.',
     addItem: "+ Add another item",
     addItemMax: (n) => `Maximum ${n} items reached`,
     submit: "Submit",
@@ -495,6 +330,7 @@ const I18N = {
     particulars: "Particulars / Details",
     particularsPlaceholder: "What was this expense for?",
     errParticulars: "Please describe the expense.",
+    errDate: "Please select a date.",
     supplier: "Supplier Name",
     supplierPlaceholder: "e.g. Shopee, Grab, 7-Eleven",
     errSupplier: "Please enter the supplier.",
@@ -505,33 +341,36 @@ const I18N = {
     uploadLabel: "Tap to take a photo or choose a file",
     uploadSub: "JPG, PNG, or PDF",
     removeItem: "Remove this item",
-    itemCount: (n) => n === 1 ? "1 item" : `${n} items`,
+    companyTotal: (amt) => `${amt} THB`,
+    selectedCount: (n) => n === 1 ? "1 company selected" : `${n} companies selected`,
     totalSuffix: " THB",
     submittingTitle: "Submitting…",
-    submittingBody: "Saving your expense and generating the voucher. This can take up to a minute, especially with photo receipts — please don't close this tab.",
+    submittingBody: "Saving your expenses and generating vouchers. This can take a while with multiple companies and photo receipts — please don't close this tab.",
     successTitle: "Submitted",
-    successBody: (doc) => `Voucher ${doc} has been created and sent to the team.`,
+    successBody: "All vouchers were created and sent to the team.",
+    partialTitle: "Partially submitted",
+    partialBody: "Some vouchers were created, but others failed. See details below.",
     errorTitle: "Submission failed",
     notConnected: "This form has not been connected to the backend yet. Set SUBMIT_URL in the page source.",
     genericError: "Something went wrong. Please try again or contact finance.",
     networkError: "Could not reach the server. Check your connection and try again.",
     submitAnother: "Submit another",
-    tryAgain: "Try again"
+    tryAgain: "Try again",
+    voucherCreated: (doc) => `Voucher ${doc}`
   },
   th: {
     title: "ส่งคำขอเบิกเงินสดย่อย",
-    subtitle: "กรอกรายการค่าใช้จ่ายด้านล่าง — เพิ่มได้สูงสุด 5 รายการต่อครั้ง",
+    subtitle: "เลือกบริษัทตั้งแต่หนึ่งแห่งขึ้นไป และกรอกค่าใช้จ่ายของแต่ละบริษัท — สูงสุด 5 รายการต่อบริษัท",
+    selectCompaniesHeading: "เลือกบริษัท",
+    errNoCompany: "กรุณาเลือกบริษัทอย่างน้อยหนึ่งแห่ง",
     submissionInfo: "ข้อมูลการส่งคำขอ",
-    company: "บริษัท",
-    selectCompany: "เลือกบริษัท…",
-    errCompany: "กรุณาเลือกบริษัท",
-    branch: "สาขา",
-    allBranches: "ทุกสาขา",
-    branchHint: 'เลือก "ทุกสาขา" หากค่าใช้จ่ายนี้ครอบคลุมทุกสาขาของบิอันก้า',
     payee: "ผู้รับเงิน",
     payeeOptional: "(ไม่บังคับ — หากไม่เลือก จะใช้ชื่อ Nuttawat Sakulsantiporn)",
     payeeDefault: "— ค่าเริ่มต้น (Nuttawat Sakulsantiporn) —",
-    errDate: "กรุณาเลือกวันที่",
+    payeeSharedHint: "ผู้รับเงินนี้จะใช้กับทุกบริษัทที่เลือกไว้ด้านบน",
+    branch: "สาขา",
+    allBranches: "ทุกสาขา",
+    branchHint: 'เลือก "ทุกสาขา" หากค่าใช้จ่ายนี้ครอบคลุมทุกสาขาของบิอันก้า',
     addItem: "+ เพิ่มรายการ",
     addItemMax: (n) => `เพิ่มได้สูงสุด ${n} รายการ`,
     submit: "ส่งคำขอ",
@@ -541,6 +380,7 @@ const I18N = {
     particulars: "รายละเอียดค่าใช้จ่าย",
     particularsPlaceholder: "ค่าใช้จ่ายนี้เกี่ยวกับอะไร?",
     errParticulars: "กรุณากรอกรายละเอียดค่าใช้จ่าย",
+    errDate: "กรุณาเลือกวันที่",
     supplier: "ชื่อผู้ขาย / ร้านค้า",
     supplierPlaceholder: "เช่น Shopee, Grab, 7-Eleven",
     errSupplier: "กรุณากรอกชื่อผู้ขาย",
@@ -551,18 +391,22 @@ const I18N = {
     uploadLabel: "แตะเพื่อถ่ายรูปหรือเลือกไฟล์",
     uploadSub: "JPG, PNG หรือ PDF",
     removeItem: "ลบรายการนี้",
-    itemCount: (n) => `${n} รายการ`,
+    companyTotal: (amt) => `${amt} บาท`,
+    selectedCount: (n) => `เลือก ${n} บริษัท`,
     totalSuffix: " บาท",
     submittingTitle: "กำลังส่งคำขอ…",
-    submittingBody: "กำลังบันทึกค่าใช้จ่ายและสร้างเอกสาร อาจใช้เวลาถึงหนึ่งนาที โดยเฉพาะถ้ามีรูปใบเสร็จ — กรุณาอย่าปิดหน้านี้",
+    submittingBody: "กำลังบันทึกค่าใช้จ่ายและสร้างเอกสาร อาจใช้เวลานานขึ้นหากเลือกหลายบริษัทหรือมีรูปใบเสร็จ — กรุณาอย่าปิดหน้านี้",
     successTitle: "ส่งคำขอสำเร็จ",
-    successBody: (doc) => `สร้างเอกสารเลขที่ ${doc} และส่งให้ทีมแล้ว`,
+    successBody: "สร้างเอกสารทั้งหมดและส่งให้ทีมแล้ว",
+    partialTitle: "สำเร็จบางส่วน",
+    partialBody: "สร้างเอกสารสำเร็จบางรายการ แต่บางรายการล้มเหลว ดูรายละเอียดด้านล่าง",
     errorTitle: "ส่งคำขอไม่สำเร็จ",
     notConnected: "ฟอร์มนี้ยังไม่ได้เชื่อมต่อกับระบบหลังบ้าน กรุณาตั้งค่า SUBMIT_URL ในซอร์สโค้ดของหน้านี้",
     genericError: "เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้งหรือติดต่อฝ่ายการเงิน",
     networkError: "ไม่สามารถเชื่อมต่อกับเซิร์ฟเวอร์ได้ กรุณาตรวจสอบอินเทอร์เน็ตแล้วลองใหม่",
     submitAnother: "ส่งคำขอใหม่",
-    tryAgain: "ลองใหม่"
+    tryAgain: "ลองใหม่",
+    voucherCreated: (doc) => `เอกสารเลขที่ ${doc}`
   }
 };
 
@@ -573,16 +417,16 @@ function t(key, ...args) {
 }
 
 // ============================================================
-// CONFIG — replace with your deployed Apps Script Web App URL
+// CONFIG
 // ============================================================
 const SUBMIT_URL = "https://script.google.com/macros/s/AKfycbyrvWzxnhK4lh7NmeorMHTzv2FSMAhTaZa0mmh2PY5Bbw7A1tvGVUEc5mbsRjThxWq2/exec";
-
 const MAX_ITEMS = 5;
 
-const itemsContainer = document.getElementById('itemsContainer');
-const addItemBtn = document.getElementById('addItemBtn');
-const companySelect = document.getElementById('company');
-const branchField = document.getElementById('branchField');
+const COMPANIES = ["BIANCA HOLDING", "HOLY BELLY EMS", "LOVA HOSPITALITY"];
+
+const companyPicker = document.getElementById('companyPicker');
+const companyPickerError = document.getElementById('companyPickerError');
+const companySectionsContainer = document.getElementById('companySectionsContainer');
 const payeeSelect = document.getElementById('payee');
 const totalAmountEl = document.getElementById('totalAmount');
 const itemCountLabelEl = document.getElementById('itemCountLabel');
@@ -590,89 +434,101 @@ const overlay = document.getElementById('overlay');
 const overlayCard = document.getElementById('overlayCard');
 const submitBtn = document.getElementById('submitBtn');
 
+// Map<companyName, { sectionEl, itemsContainerEl, addBtnEl, branchSelectEl|null }>
+const companyBlocks = new Map();
+
 // ============================================================
-// LANGUAGE TOGGLE
+// COMPANY SECTION CREATION / REMOVAL
 // ============================================================
-function applyStaticTranslations() {
-  document.querySelectorAll('[data-i18n]').forEach(el => {
-    const key = el.dataset.i18n;
-    const val = t(key);
-    if (typeof val === 'string') el.textContent = val;
+companyPicker.querySelectorAll('.company-checkbox').forEach(cb => {
+  cb.addEventListener('change', () => {
+    const companyName = cb.value;
+    if (cb.checked) {
+      addCompanySection(companyName);
+    } else {
+      removeCompanySection(companyName);
+    }
+    updateGlobalTotals();
   });
-  document.documentElement.lang = currentLang;
-}
+});
 
-function rerenderDynamicText() {
-  // Item blocks contain JS-generated text that data-i18n can't reach
-  // directly (labels built at creation time) — refresh them in place.
-  itemsContainer.querySelectorAll('.item-block').forEach(block => {
-    refreshItemBlockText(block);
+function addCompanySection(companyName) {
+  const section = document.createElement('div');
+  section.className = 'company-section';
+  section.dataset.company = companyName;
+
+  const isBianca = companyName === 'BIANCA HOLDING';
+
+  section.innerHTML = `
+    <div class="company-section-title">
+      <span>${companyName}</span>
+      <span class="company-total" data-role="company-total">0.00 THB</span>
+    </div>
+    ${isBianca ? `
+    <div class="card">
+      <div class="field" data-field="branch">
+        <label data-i18n-local="branch">${t('branch')}</label>
+        <select class="branch-select">
+          <option value="" data-i18n-local="allBranches">${t('allBranches')}</option>
+          <option value="BIANCA EMSPHERE">BIANCA EMSPHERE</option>
+          <option value="BIANCA ONE BANGKOK">BIANCA ONE BANGKOK</option>
+          <option value="BIANCA ICONSIAM">BIANCA ICONSIAM</option>
+          <option value="BIANCA TERMINAL 21">BIANCA TERMINAL 21</option>
+          <option value="BIANCA SIAM PARAGON">BIANCA SIAM PARAGON</option>
+        </select>
+        <div class="hint" data-i18n-local="branchHint">${t('branchHint')}</div>
+      </div>
+    </div>` : ''}
+    <div class="items-container"></div>
+    <button type="button" class="add-item-btn">${t('addItem')}</button>
+  `;
+
+  companySectionsContainer.appendChild(section);
+
+  const itemsContainerEl = section.querySelector('.items-container');
+  const addBtnEl = section.querySelector('.add-item-btn');
+  const branchSelectEl = section.querySelector('.branch-select') || null;
+
+  const block = { sectionEl: section, itemsContainerEl, addBtnEl, branchSelectEl, companyName };
+  companyBlocks.set(companyName, block);
+
+  // First item is always required and added immediately
+  itemsContainerEl.appendChild(buildItemBlock(block, 1));
+  updateAddButtonState(block);
+
+  addBtnEl.addEventListener('click', () => {
+    const currentCount = itemsContainerEl.querySelectorAll('.item-block').length;
+    if (currentCount >= MAX_ITEMS) return;
+    const itemBlock = buildItemBlock(block, currentCount + 1);
+    itemsContainerEl.appendChild(itemBlock);
+    updateAddButtonState(block);
+    updateGlobalTotals();
+    if (typeof itemBlock.scrollIntoView === 'function') {
+      itemBlock.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
   });
-  updateAddButton();
-  updateTotal();
 }
 
-document.getElementById('langEn').addEventListener('click', () => setLang('en'));
-document.getElementById('langTh').addEventListener('click', () => setLang('th'));
-
-function setLang(lang) {
-  currentLang = lang;
-  document.getElementById('langEn').classList.toggle('active', lang === 'en');
-  document.getElementById('langTh').classList.toggle('active', lang === 'th');
-  applyStaticTranslations();
-  rerenderDynamicText();
+function removeCompanySection(companyName) {
+  const block = companyBlocks.get(companyName);
+  if (block) {
+    block.sectionEl.remove();
+    companyBlocks.delete(companyName);
+  }
 }
 
 // ============================================================
-// ITEM BLOCKS
+// ITEM BLOCKS (scoped to a company block)
 // ============================================================
-function buildItemBlock(n) {
+function buildItemBlock(companyBlock, n) {
   const wrap = document.createElement('div');
   wrap.className = 'card item-block';
   wrap.dataset.itemIndex = n;
   wrap.innerHTML = itemBlockHtml(n);
 
-  wrap.querySelector('.item-amount').addEventListener('input', updateTotal);
+  wrap.querySelector('.item-amount').addEventListener('input', updateGlobalTotals);
 
-  const fileInput = wrap.querySelector('.item-receipt');
-  const uploadZone = wrap.querySelector('.upload-zone');
-  const previewEl = wrap.querySelector('.upload-preview');
-
-  fileInput.addEventListener('change', async (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
-
-    uploadZone.classList.add('has-file');
-    let displayUrl = '';
-    let processedBase64 = null;
-
-    if (file.type.startsWith('image/')) {
-      const result = await compressImage(file);
-      processedBase64 = result.base64;
-      displayUrl = result.base64;
-    } else if (file.type === 'application/pdf') {
-      processedBase64 = await fileToBase64(file);
-    }
-
-    wrap.dataset.receiptBase64 = processedBase64 || '';
-    wrap.dataset.receiptFileName = file.name;
-
-    previewEl.style.display = 'flex';
-    previewEl.innerHTML = `
-      ${displayUrl ? `<img src="${displayUrl}" alt="">` : '<div style="width:52px;height:52px;border-radius:6px;background:var(--purple-light);display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--purple);font-weight:700;">PDF</div>'}
-      <div class="file-meta"><strong>${escapeHtml(file.name)}</strong>${(file.size/1024).toFixed(0)} KB</div>
-    `;
-  });
-
-  const removeBtn = wrap.querySelector('.remove-item');
-  if (removeBtn) {
-    removeBtn.addEventListener('click', () => {
-      wrap.remove();
-      renumberItems();
-      updateTotal();
-      updateAddButton();
-    });
-  }
+  wireItemBlockEvents(wrap, companyBlock);
 
   return wrap;
 }
@@ -721,51 +577,19 @@ function itemBlockHtml(n) {
   `;
 }
 
-// When the language changes, item blocks need their text refreshed WITHOUT
-// losing whatever the person already typed into the inputs.
-function refreshItemBlockText(block) {
-  const n = parseInt(block.dataset.itemIndex, 10);
-  const isFirst = n === 1;
-
-  // Save current values
-  const saved = {
-    date: block.querySelector('.item-date')?.value || '',
-    particulars: block.querySelector('.item-particulars')?.value || '',
-    supplier: block.querySelector('.item-supplier')?.value || '',
-    amount: block.querySelector('.item-amount')?.value || '',
-  };
-  const preview = block.querySelector('.upload-preview');
-  const previewHtml = preview ? preview.innerHTML : '';
-  const previewDisplay = preview ? preview.style.display : 'none';
-  const hasFileClass = block.querySelector('.upload-zone')?.classList.contains('has-file');
-
-  block.innerHTML = itemBlockHtml(n);
-
-  block.querySelector('.item-date').value = saved.date;
-  block.querySelector('.item-particulars').value = saved.particulars;
-  block.querySelector('.item-supplier').value = saved.supplier;
-  block.querySelector('.item-amount').value = saved.amount;
-
-  if (previewHtml) {
-    const newPreview = block.querySelector('.upload-preview');
-    newPreview.innerHTML = previewHtml;
-    newPreview.style.display = previewDisplay;
-  }
-  if (hasFileClass) block.querySelector('.upload-zone').classList.add('has-file');
-
-  // Re-wire events (innerHTML replacement wiped the old listeners)
-  block.querySelector('.item-amount').addEventListener('input', updateTotal);
-
-  const fileInput = block.querySelector('.item-receipt');
-  const uploadZone = block.querySelector('.upload-zone');
-  const previewEl = block.querySelector('.upload-preview');
+function wireItemBlockEvents(wrap, companyBlock) {
+  const fileInput = wrap.querySelector('.item-receipt');
+  const uploadZone = wrap.querySelector('.upload-zone');
+  const previewEl = wrap.querySelector('.upload-preview');
 
   fileInput.addEventListener('change', async (e) => {
     const file = e.target.files[0];
     if (!file) return;
+
     uploadZone.classList.add('has-file');
     let displayUrl = '';
     let processedBase64 = null;
+
     if (file.type.startsWith('image/')) {
       const result = await compressImage(file);
       processedBase64 = result.base64;
@@ -773,8 +597,10 @@ function refreshItemBlockText(block) {
     } else if (file.type === 'application/pdf') {
       processedBase64 = await fileToBase64(file);
     }
-    block.dataset.receiptBase64 = processedBase64 || '';
-    block.dataset.receiptFileName = file.name;
+
+    wrap.dataset.receiptBase64 = processedBase64 || '';
+    wrap.dataset.receiptFileName = file.name;
+
     previewEl.style.display = 'flex';
     previewEl.innerHTML = `
       ${displayUrl ? `<img src="${displayUrl}" alt="">` : '<div style="width:52px;height:52px;border-radius:6px;background:var(--purple-light);display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--purple);font-weight:700;">PDF</div>'}
@@ -782,15 +608,47 @@ function refreshItemBlockText(block) {
     `;
   });
 
-  const removeBtn = block.querySelector('.remove-item');
+  const removeBtn = wrap.querySelector('.remove-item');
   if (removeBtn) {
     removeBtn.addEventListener('click', () => {
-      block.remove();
-      renumberItems();
-      updateTotal();
-      updateAddButton();
+      wrap.remove();
+      renumberItems(companyBlock);
+      updateGlobalTotals();
+      updateAddButtonState(companyBlock);
     });
   }
+}
+
+function refreshItemBlockText(wrap, companyBlock) {
+  const n = parseInt(wrap.dataset.itemIndex, 10);
+
+  const saved = {
+    date: wrap.querySelector('.item-date')?.value || '',
+    particulars: wrap.querySelector('.item-particulars')?.value || '',
+    supplier: wrap.querySelector('.item-supplier')?.value || '',
+    amount: wrap.querySelector('.item-amount')?.value || '',
+  };
+  const preview = wrap.querySelector('.upload-preview');
+  const previewHtml = preview ? preview.innerHTML : '';
+  const previewDisplay = preview ? preview.style.display : 'none';
+  const hasFileClass = wrap.querySelector('.upload-zone')?.classList.contains('has-file');
+
+  wrap.innerHTML = itemBlockHtml(n);
+
+  wrap.querySelector('.item-date').value = saved.date;
+  wrap.querySelector('.item-particulars').value = saved.particulars;
+  wrap.querySelector('.item-supplier').value = saved.supplier;
+  wrap.querySelector('.item-amount').value = saved.amount;
+
+  if (previewHtml) {
+    const newPreview = wrap.querySelector('.upload-preview');
+    newPreview.innerHTML = previewHtml;
+    newPreview.style.display = previewDisplay;
+  }
+  if (hasFileClass) wrap.querySelector('.upload-zone').classList.add('has-file');
+
+  wrap.querySelector('.item-amount').addEventListener('input', updateGlobalTotals);
+  wireItemBlockEvents(wrap, companyBlock);
 }
 
 function escapeHtml(str) {
@@ -838,8 +696,8 @@ function compressImage(file, maxDimension = 1600, quality = 0.75) {
   });
 }
 
-function renumberItems() {
-  const blocks = itemsContainer.querySelectorAll('.item-block');
+function renumberItems(companyBlock) {
+  const blocks = companyBlock.itemsContainerEl.querySelectorAll('.item-block');
   blocks.forEach((block, idx) => {
     const n = idx + 1;
     block.dataset.itemIndex = n;
@@ -849,48 +707,37 @@ function renumberItems() {
   });
 }
 
-function updateAddButton() {
-  const blocks = itemsContainer.querySelectorAll('.item-block').length;
-  addItemBtn.disabled = blocks >= MAX_ITEMS;
-  addItemBtn.textContent = blocks >= MAX_ITEMS ? t('addItemMax', MAX_ITEMS) : t('addItem');
+function updateAddButtonState(companyBlock) {
+  const blocks = companyBlock.itemsContainerEl.querySelectorAll('.item-block').length;
+  companyBlock.addBtnEl.disabled = blocks >= MAX_ITEMS;
+  companyBlock.addBtnEl.textContent = blocks >= MAX_ITEMS ? t('addItemMax', MAX_ITEMS) : t('addItem');
 }
 
-function updateTotal() {
-  const amounts = itemsContainer.querySelectorAll('.item-amount');
-  let total = 0;
-  amounts.forEach(input => { total += parseFloat(input.value) || 0; });
-  totalAmountEl.textContent = total.toFixed(2) + t('totalSuffix');
+function updateGlobalTotals() {
+  let grandTotal = 0;
 
-  const n = itemsContainer.querySelectorAll('.item-block').length;
-  itemCountLabelEl.textContent = t('itemCount', n);
+  companyBlocks.forEach(block => {
+    let companyTotal = 0;
+    block.itemsContainerEl.querySelectorAll('.item-amount').forEach(input => {
+      companyTotal += parseFloat(input.value) || 0;
+    });
+    grandTotal += companyTotal;
+
+    const totalLabel = block.sectionEl.querySelector('[data-role="company-total"]');
+    if (totalLabel) totalLabel.textContent = t('companyTotal', companyTotal.toFixed(2));
+  });
+
+  totalAmountEl.textContent = grandTotal.toFixed(2) + t('totalSuffix');
+  itemCountLabelEl.textContent = t('selectedCount', companyBlocks.size);
 }
 
-addItemBtn.addEventListener('click', () => {
-  const currentCount = itemsContainer.querySelectorAll('.item-block').length;
-  if (currentCount >= MAX_ITEMS) return;
-  const block = buildItemBlock(currentCount + 1);
-  itemsContainer.appendChild(block);
-  updateAddButton();
-  updateTotal();
-  if (typeof block.scrollIntoView === 'function') {
-    block.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }
-});
-
-companySelect.addEventListener('change', () => {
-  branchField.style.display = companySelect.value === 'BIANCA HOLDING' ? 'block' : 'none';
-});
-
-// ---- Initial state ----
-itemsContainer.appendChild(buildItemBlock(1));
-updateAddButton();
-updateTotal();
+updateGlobalTotals();
 
 // ============================================================
 // PAYEE DROPDOWN — populated live from the "Payees" sheet tab
 // ============================================================
 async function loadPayees() {
-  if (SUBMIT_URL.indexOf('PASTE_YOUR') === 0) return; // not configured yet
+  if (SUBMIT_URL.indexOf('PASTE_YOUR') === 0) return;
 
   try {
     const res = await fetch(SUBMIT_URL, {
@@ -908,15 +755,57 @@ async function loadPayees() {
       payeeSelect.appendChild(opt);
     });
   } catch (err) {
-    // Silent fail — the default option (blank = uses fallback name server-side)
-    // still works fine even if the live list couldn't be fetched.
     console.warn('Could not load payees list:', err);
   }
 }
 loadPayees();
 
 // ============================================================
-// VALIDATION + SUBMIT
+// LANGUAGE TOGGLE
+// ============================================================
+function applyStaticTranslations() {
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.dataset.i18n;
+    const val = t(key);
+    if (typeof val === 'string') el.textContent = val;
+  });
+  document.documentElement.lang = currentLang;
+}
+
+function rerenderDynamicText() {
+  companyBlocks.forEach(block => {
+    // Refresh branch field labels (Bianca only)
+    if (block.branchSelectEl) {
+      const labelEl = block.sectionEl.querySelector('[data-i18n-local="branch"]');
+      const allBranchesOpt = block.sectionEl.querySelector('[data-i18n-local="allBranches"]');
+      const hintEl = block.sectionEl.querySelector('[data-i18n-local="branchHint"]');
+      if (labelEl) labelEl.textContent = t('branch');
+      if (allBranchesOpt) allBranchesOpt.textContent = t('allBranches');
+      if (hintEl) hintEl.textContent = t('branchHint');
+    }
+
+    block.itemsContainerEl.querySelectorAll('.item-block').forEach(itemEl => {
+      refreshItemBlockText(itemEl, block);
+    });
+
+    updateAddButtonState(block);
+  });
+  updateGlobalTotals();
+}
+
+document.getElementById('langEn').addEventListener('click', () => setLang('en'));
+document.getElementById('langTh').addEventListener('click', () => setLang('th'));
+
+function setLang(lang) {
+  currentLang = lang;
+  document.getElementById('langEn').classList.toggle('active', lang === 'en');
+  document.getElementById('langTh').classList.toggle('active', lang === 'th');
+  applyStaticTranslations();
+  rerenderDynamicText();
+}
+
+// ============================================================
+// VALIDATION
 // ============================================================
 function setFieldError(fieldEl, isInvalid) {
   fieldEl.classList.toggle('invalid', isInvalid);
@@ -925,90 +814,101 @@ function setFieldError(fieldEl, isInvalid) {
 function validateForm() {
   let valid = true;
 
-  const companyField = document.querySelector('[data-field="company"]');
-  if (!companySelect.value) { setFieldError(companyField, true); valid = false; }
-  else setFieldError(companyField, false);
-
-  const firstBlock = itemsContainer.querySelector('.item-block[data-item-index="1"]');
-  if (firstBlock) {
-    const checks = [
-      ['.item-date', 'date'],
-      ['.item-particulars', 'particulars'],
-      ['.item-supplier', 'supplier'],
-      ['.item-amount', 'amount']
-    ];
-    checks.forEach(([selector, fieldName]) => {
-      const input = firstBlock.querySelector(selector);
-      const fieldEl = firstBlock.querySelector(`[data-field="${fieldName}"]`);
-      const isEmpty = !input.value || (fieldName === 'amount' && parseFloat(input.value) <= 0);
-      setFieldError(fieldEl, isEmpty);
-      if (isEmpty) valid = false;
-    });
+  if (companyBlocks.size === 0) {
+    companyPickerError.classList.add('show');
+    valid = false;
+  } else {
+    companyPickerError.classList.remove('show');
   }
 
-  const otherBlocks = itemsContainer.querySelectorAll('.item-block:not([data-item-index="1"])');
-  otherBlocks.forEach(block => {
-    const dateInput = block.querySelector('.item-date');
-    const particularsInput = block.querySelector('.item-particulars');
-    const supplierInput = block.querySelector('.item-supplier');
-    const amountInput = block.querySelector('.item-amount');
+  companyBlocks.forEach(block => {
+    const allItemBlocks = block.itemsContainerEl.querySelectorAll('.item-block');
 
-    const values = {
-      date: dateInput.value,
-      particulars: particularsInput.value.trim(),
-      supplier: supplierInput.value.trim(),
-      amount: parseFloat(amountInput.value) || 0
-    };
+    allItemBlocks.forEach(itemEl => {
+      const n = parseInt(itemEl.dataset.itemIndex, 10);
+      const isFirst = n === 1;
 
-    const anyFilled = values.date || values.particulars || values.supplier || values.amount > 0;
-    const allFilled = values.date && values.particulars && values.supplier && values.amount > 0;
+      const dateInput = itemEl.querySelector('.item-date');
+      const particularsInput = itemEl.querySelector('.item-particulars');
+      const supplierInput = itemEl.querySelector('.item-supplier');
+      const amountInput = itemEl.querySelector('.item-amount');
 
-    if (anyFilled && !allFilled) {
-      const fieldMap = {
-        date: ['.item-date', 'date'],
-        particulars: ['.item-particulars', 'particulars'],
-        supplier: ['.item-supplier', 'supplier'],
-        amount: ['.item-amount', 'amount']
+      const values = {
+        date: dateInput.value,
+        particulars: particularsInput.value.trim(),
+        supplier: supplierInput.value.trim(),
+        amount: parseFloat(amountInput.value) || 0
       };
-      Object.entries(fieldMap).forEach(([key, [selector, fieldName]]) => {
-        const fieldEl = block.querySelector(`[data-field="${fieldName}"]`);
-        const isEmpty = key === 'amount' ? values.amount <= 0 : !values[key];
-        setFieldError(fieldEl, isEmpty);
-        if (isEmpty) valid = false;
-      });
-    } else {
-      block.querySelectorAll('.field').forEach(f => setFieldError(f, false));
-    }
+
+      if (isFirst) {
+        // Item 1 is always required per company
+        const checks = [
+          [dateInput, 'date', !values.date],
+          [particularsInput, 'particulars', !values.particulars],
+          [supplierInput, 'supplier', !values.supplier],
+          [amountInput, 'amount', values.amount <= 0]
+        ];
+        checks.forEach(([input, fieldName, isEmpty]) => {
+          const fieldEl = itemEl.querySelector(`[data-field="${fieldName}"]`);
+          setFieldError(fieldEl, isEmpty);
+          if (isEmpty) valid = false;
+        });
+      } else {
+        const anyFilled = values.date || values.particulars || values.supplier || values.amount > 0;
+        const allFilled = values.date && values.particulars && values.supplier && values.amount > 0;
+
+        if (anyFilled && !allFilled) {
+          const fieldMap = { date: !values.date, particulars: !values.particulars, supplier: !values.supplier, amount: values.amount <= 0 };
+          Object.entries(fieldMap).forEach(([fieldName, isEmpty]) => {
+            const fieldEl = itemEl.querySelector(`[data-field="${fieldName}"]`);
+            setFieldError(fieldEl, isEmpty);
+            if (isEmpty) valid = false;
+          });
+        } else {
+          itemEl.querySelectorAll('.field').forEach(f => setFieldError(f, false));
+        }
+      }
+    });
   });
 
   return valid;
 }
 
 function collectPayload() {
-  const blocks = Array.from(itemsContainer.querySelectorAll('.item-block'));
+  const submissions = [];
 
-  const items = blocks
-    .map(block => {
-      const date = block.querySelector('.item-date').value;
-      const particulars = block.querySelector('.item-particulars').value.trim();
-      const supplier = block.querySelector('.item-supplier').value.trim();
-      const amount = parseFloat(block.querySelector('.item-amount').value) || 0;
-      const receiptBase64 = block.dataset.receiptBase64 || '';
-      const receiptFileName = block.dataset.receiptFileName || '';
-      return { date, particulars, supplier, amount, receiptBase64, receiptFileName };
-    })
-    .filter(item => item.date && item.particulars && item.supplier && item.amount > 0);
+  companyBlocks.forEach(block => {
+    const items = Array.from(block.itemsContainerEl.querySelectorAll('.item-block'))
+      .map(itemEl => {
+        const date = itemEl.querySelector('.item-date').value;
+        const particulars = itemEl.querySelector('.item-particulars').value.trim();
+        const supplier = itemEl.querySelector('.item-supplier').value.trim();
+        const amount = parseFloat(itemEl.querySelector('.item-amount').value) || 0;
+        const receiptBase64 = itemEl.dataset.receiptBase64 || '';
+        const receiptFileName = itemEl.dataset.receiptFileName || '';
+        return { date, particulars, supplier, amount, receiptBase64, receiptFileName };
+      })
+      .filter(item => item.date && item.particulars && item.supplier && item.amount > 0);
+
+    submissions.push({
+      company: block.companyName,
+      branch: block.branchSelectEl ? block.branchSelectEl.value : '',
+      items
+    });
+  });
 
   return {
-    company: companySelect.value,
-    branch: companySelect.value === 'BIANCA HOLDING' ? document.getElementById('branch').value : '',
     payee: payeeSelect.value,
-    items
+    submissions
   };
 }
 
-function showOverlay(state, message) {
+// ============================================================
+// SUBMIT
+// ============================================================
+function showOverlay(state, opts = {}) {
   overlay.classList.add('show');
+
   if (state === 'loading') {
     overlayCard.className = 'overlay-card';
     overlayCard.innerHTML = `
@@ -1016,24 +916,43 @@ function showOverlay(state, message) {
       <h3>${t('submittingTitle')}</h3>
       <p>${t('submittingBody')}</p>
     `;
-  } else if (state === 'success') {
-    overlayCard.className = 'overlay-card success';
+  } else if (state === 'success' || state === 'partial' || state === 'error') {
+    const isSuccess = state === 'success';
+    const isPartial = state === 'partial';
+    const icon = isSuccess ? '✅' : isPartial ? '⚠️' : '⚠️';
+    const titleKey = isSuccess ? 'successTitle' : isPartial ? 'partialTitle' : 'errorTitle';
+    const bodyText = opts.message || (isSuccess ? t('successBody') : isPartial ? t('partialBody') : t('genericError'));
+
+    let listHtml = '';
+    if (opts.results && opts.results.length) {
+      listHtml += '<ul class="result-list">';
+      opts.results.forEach(r => {
+        listHtml += `<li><span>${escapeHtml(r.company)}</span><span class="ok">✓ ${escapeHtml(t('voucherCreated', r.docNumber))}</span></li>`;
+      });
+      if (opts.errors) {
+        opts.errors.forEach(er => {
+          listHtml += `<li><span>${escapeHtml(er.company)}</span><span class="fail">✗ ${escapeHtml(er.error)}</span></li>`;
+        });
+      }
+      listHtml += '</ul>';
+    }
+
+    overlayCard.className = 'overlay-card ' + (isSuccess ? 'success' : isPartial ? 'partial' : 'error');
     overlayCard.innerHTML = `
-      <div class="icon">✅</div>
-      <h3>${t('successTitle')}</h3>
-      <p>${message}</p>
-      <button type="button" id="overlayCloseBtn">${t('submitAnother')}</button>
+      <div class="icon">${icon}</div>
+      <h3>${t(titleKey)}</h3>
+      <p>${bodyText}</p>
+      ${listHtml}
+      <button type="button" id="overlayCloseBtn">${isSuccess ? t('submitAnother') : t('tryAgain')}</button>
     `;
-    document.getElementById('overlayCloseBtn').addEventListener('click', () => window.location.reload());
-  } else if (state === 'error') {
-    overlayCard.className = 'overlay-card error';
-    overlayCard.innerHTML = `
-      <div class="icon">⚠️</div>
-      <h3>${t('errorTitle')}</h3>
-      <p>${message}</p>
-      <button type="button" id="overlayCloseBtn">${t('tryAgain')}</button>
-    `;
-    document.getElementById('overlayCloseBtn').addEventListener('click', () => overlay.classList.remove('show'));
+
+    document.getElementById('overlayCloseBtn').addEventListener('click', () => {
+      if (isSuccess) {
+        window.location.reload();
+      } else {
+        overlay.classList.remove('show');
+      }
+    });
   }
 }
 
@@ -1041,7 +960,7 @@ document.getElementById('pettyForm').addEventListener('submit', async (e) => {
   e.preventDefault();
 
   if (!validateForm()) {
-    const invalidField = document.querySelector('.field.invalid');
+    const invalidField = document.querySelector('.field.invalid') || (companyPickerError.classList.contains('show') ? companyPickerError : null);
     if (invalidField && typeof invalidField.scrollIntoView === 'function') {
       invalidField.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
@@ -1049,7 +968,7 @@ document.getElementById('pettyForm').addEventListener('submit', async (e) => {
   }
 
   if (SUBMIT_URL.indexOf('PASTE_YOUR') === 0) {
-    showOverlay('error', t('notConnected'));
+    showOverlay('error', { message: t('notConnected') });
     return;
   }
 
@@ -1061,19 +980,22 @@ document.getElementById('pettyForm').addEventListener('submit', async (e) => {
   try {
     const res = await fetch(SUBMIT_URL, {
       method: 'POST',
-      headers: { 'Content-Type': 'text/plain;charset=utf-8' }, // avoids CORS preflight against Apps Script
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
       body: JSON.stringify(payload)
     });
     const data = await res.json();
 
     if (data.success) {
-      showOverlay('success', t('successBody', data.docNumber));
+      showOverlay('success', { results: data.results });
+    } else if (data.results && data.results.length) {
+      showOverlay('partial', { results: data.results, errors: data.errors });
+      submitBtn.disabled = false;
     } else {
-      showOverlay('error', data.error || t('genericError'));
+      showOverlay('error', { message: data.error || t('genericError') });
       submitBtn.disabled = false;
     }
   } catch (err) {
-    showOverlay('error', t('networkError'));
+    showOverlay('error', { message: t('networkError') });
     submitBtn.disabled = false;
   }
 });
